@@ -1,0 +1,53 @@
+AGENDA NATALINA — MARLUCE SOUZA FOTOGRAFIA
+Versão inicial | HTML, CSS e JavaScript + Supabase | GitHub Pages
+
+O QUE TEM
+• Design Fine-Art responsivo para celular e computador.
+• Calendário 02/12/2026 a 18/01/2027; horários de início 10:00 a 16:00 (1 hora por ensaio, último termina às 17h).
+• Cadastro de nome, WhatsApp, fotografado, data, tipo, roupa, status, valor, sinal e observações.
+• Lista de clientes, busca, financeiro, WhatsApp com mensagem pronta.
+• Dados sincronizados via Supabase e atualizados a cada 30 segundos / ao retornar à aba.
+• Banco impede duas reservas ativas no mesmo dia+horário.
+• Exportação de backup JSON. Não há restauração via interface nesta versão.
+
+PASSO A PASSO: BANCO
+1) Abra https://supabase.com/ e crie um projeto gratuito.
+2) No painel: Authentication > Users > Add user. Cadastre UM e-mail e senha forte para a agenda.
+   Marque o e-mail como confirmado se a opção aparecer.
+3) Copie o User UID (UUID) desse usuário.
+4) Authentication > Providers > Email: DESATIVE novas inscrições públicas (Allow new users to sign up).
+5) Abra SQL Editor. Cole o conteúdo de banco.sql, substitua as DUAS ocorrências de
+   00000000-0000-0000-0000-000000000000 pelo User UID do passo 3 e execute.
+6) Em Project Settings > API Keys, copie a chave PUBLICÁVEL (Publishable key, ou anon legacy).
+   Copie também a Project URL de Project Settings > Data API / API.
+7) Abra config.js e substitua os dois valores pelo URL e chave pública do seu projeto.
+   NUNCA use chave secret, service_role ou senha do projeto nesses arquivos.
+8) Teste: abra index.html no navegador com internet, faça login e cadastre um ensaio.
+   Se o navegador bloquear a execução local, execute um servidor simples ou publique no GitHub.
+
+PASSO A PASSO: GITHUB
+1) Crie um repositório (preferencialmente privado se quiser guardar o código; note que Pages pode depender
+   do seu plano para repositórios privados; o site publicado em Pages é público).
+2) Envie index.html, style.css, app.js, config.js e .nojekyll para a raiz do repositório.
+   NÃO precisa publicar banco.sql nem este README, embora banco.sql não contenha segredo após
+   inserir o UID; por cautela, deixe ambos fora do site.
+3) Settings > Pages > Build and deployment > Deploy from a branch > main > /(root) > Save.
+4) Abra a URL indicada em Pages. Entre com o e-mail e senha criados no Supabase.
+5) Abra essa MESMA URL no celular e entre com as mesmas credenciais.
+6) Cadastre uma reserva no computador e confirme que apareceu no celular.
+
+SEGURANÇA E LIMITAÇÕES
+• O GitHub Pages é público; a agenda só exibe dados após autenticação.
+• A chave publicável Supabase no frontend não é segredo. Segurança depende das políticas RLS de banco.sql.
+• O banco desta versão permite acesso exclusivamente ao UID cadastrado no SQL.
+• É uma solução de uma única conta em vários dispositivos. Não compartilhe a senha fora da equipe.
+• O plano grátis Supabase pode pausar após uma semana de baixa atividade. Acesse periodicamente e faça backup.
+• Backup é manual, via botão, sem restauro automático.
+• Sem PWA/offline nesta versão. Exige internet para carregar, entrar e salvar.
+• O banco não armazena fotos nem processa Pix.
+• A exclusão é definitiva, confirme antes de excluir.
+• Para não perder dados de clientes, faça backup regularmente e mantenha o arquivo guardado em local seguro.
+• O intervalo adotado é uma hora por ensaio. Para outra duração, adapte também a restrição do banco.
+• Ajuste termos de sinal/cancelamento às regras aplicáveis e informe aos clientes previamente.
+
+MUDANÇAS DE ANO: a campanha é fixa entre 2026 e 2027. Alterar exige modificar datas no app e SQL.

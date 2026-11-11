@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#164b3b"/>
+  <meta name="description" content="Agenda privativa de ensaios — Marluce Souza Fotografia"/>
+  <title>Agenda Natalina | Marluce Souza Fotografia</title>
+  <link rel="stylesheet" href="./style.css"/>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">M<span class="brand-star">✳</span></span><div><strong>Marluce Souza</strong><small>FOTOGRAFIA · ESTÚDIO</small></div></div>
+    <div class="section-caption">ESPAÇO DE TRABALHO</div>
+    <nav class="nav" aria-label="Navegação principal">
+      <button class="nav-btn active" data-view="agenda"><span>▦</span> Agenda</button>
+      <button class="nav-btn" data-view="clientes"><span>♧</span> Clientes</button>
+      <button class="nav-btn" data-view="financeiro"><span>◫</span> Financeiro</button>
+    </nav>
+    <div class="sidebar-footer"><div class="campaign"><span class="dot"></span> CAMPANHA 2026 / 2027<strong>Natal em família</strong><small>02 dez — 18 jan</small></div><button id="logout" class="text-button">Sair da conta ↗</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div><div class="eyebrow">MARLUCE SOUZA · AGENDA PRIVADA</div><h1 id="page-title">Agenda de Natal</h1><p id="page-subtitle">Todos os ensaios em um só lugar.</p></div><div class="top-actions"><span id="sync-status" class="sync-status">● Conectando</span><button id="export-json" class="outline-btn" title="Baixar cópia de segurança">↓ Backup</button><button id="add-btn" class="primary-btn">＋ Novo ensaio</button></div></header>
+    <div id="notice" class="notice hidden" role="status"></div>
+    <section id="app-content" class="hidden">
+      <div class="stats" id="stats"></div>
+      <section id="agenda-view" class="view">
+        <div class="section-head"><div><h2>Calendário de ensaios</h2><p>Selecione uma data para ver e organizar os horários.</p></div><div class="month-switch"><button id="prev-month" aria-label="Mês anterior">‹</button><strong id="month-label">Dezembro 2026</strong><button id="next-month" aria-label="Próximo mês">›</button></div></div>
+        <div class="workspace"><div class="calendar-panel"><div class="weeknames"><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span><span>DOM</span></div><div id="calendar" class="calendar"></div><div class="legend"><span><i class="green"></i> Disponível</span><span><i class="gold"></i> Com reservas</span><span><i class="gray"></i> Fora da campanha</span></div></div><div class="day-panel"><div class="day-head"><span class="eyebrow">PROGRAMAÇÃO DO DIA</span><h3 id="selected-date-title">—</h3><p id="day-caption">—</p></div><div id="slots" class="slots"></div></div></div>
+      </section>
+      <section id="clientes-view" class="view hidden"><div class="section-head"><div><h2>Todos os clientes</h2><p>Encontre rapidamente uma reserva.</p></div><input id="search" class="search" placeholder="Buscar nome ou telefone" aria-label="Buscar clientes"/></div><div id="client-list" class="list-panel"></div></section>
+      <section id="financeiro-view" class="view hidden"><div class="section-head"><div><h2>Resumo financeiro</h2><p>Controle simples dos sinais e saldos da campanha.</p></div></div><div id="finance-details" class="list-panel"></div></section>
+      <footer class="footer">Marluce Souza Fotografia <span>Agenda de uso interno · 2026/27</span></footer>
+    </section>
+    <section id="setup-screen" class="center-screen hidden"><div class="setup-card"><span class="eyebrow">CONFIGURAÇÃO INICIAL</span><h2>Conecte sua agenda</h2><p>O site já está pronto. Falta apenas colocar a URL e a chave pública do seu projeto Supabase no arquivo <code>config.js</code>. Veja o arquivo <strong>LEIA-ME.txt</strong> incluído no pacote.</p><div class="info-strip">Nunca coloque a chave <strong>service_role</strong> ou senha do banco no GitHub.</div></div></section>
+    <section id="login-screen" class="center-screen hidden"><form id="login-form" class="login-card"><div class="login-symbol">M<span>✳</span></div><span class="eyebrow">ACESSO RESERVADO</span><h2>Bem-vinda à sua agenda.</h2><p>Entre para consultar os ensaios em todos os dispositivos.</p><label>E-mail<input id="login-email" type="email" autocomplete="username" required placeholder="seu@email.com"/></label><label>Senha<input id="login-password" type="password" autocomplete="current-password" required placeholder="Sua senha"/></label><button id="login-submit" type="submit" class="primary-btn block">Entrar na agenda →</button><p id="login-error" class="error hidden"></p><small>Somente usuários previamente autorizados têm acesso.</small></form></section>
+  </main>
+</div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-backdrop" data-close="modal"></div><form id="appointment-form" class="modal-card"><div class="modal-header"><div><span class="eyebrow">AGENDAMENTO</span><h2 id="modal-title">Novo ensaio</h2></div><button type="button" class="icon-btn" data-close="modal" aria-label="Fechar">×</button></div><div class="form-grid"><label class="wide">Nome do responsável <span>*</span><input name="client_name" maxlength="120" required placeholder="Ex.: Ana Carolina"/></label><label>WhatsApp com DDD <span>*</span><input name="phone" inputmode="tel" required maxlength="20" placeholder="(21) 99999-9999"/></label><label>Nome da criança / fotografado<input name="subject_name" maxlength="120" placeholder="Opcional"/></label><label>Data <span>*</span><input name="session_date" type="date" min="2026-12-02" max="2027-01-18" required/></label><label>Horário <span>*</span><select name="start_time" required></select></label><label>Tipo de ensaio<select name="session_type"><option>Natalino</option><option>Família</option><option>Infantil</option><option>Outro</option></select></label><label>Tamanho da roupa<input name="clothing_size" maxlength="40" placeholder="Se necessário"/></label><label>Status<select name="status"><option value="pendente">Aguardando sinal</option><option value="confirmado">Confirmado</option><option value="concluido">Concluído</option><option value="cancelado">Cancelado</option></select></label><label>Valor do ensaio (R$)<input name="total_amount" type="number" min="0" max="999999" step="0.01" value="200" required/></label><label>Valor recebido (R$)<input name="paid_amount" type="number" min="0" max="999999" step="0.01" value="0" required/></label><label class="wide">Observações<textarea name="notes" rows="2" maxlength="1000" placeholder="Informações importantes para o atendimento"></textarea></label></div><p class="form-help">Horários de 1 hora, com último ensaio às 16h. O sistema impede duas reservas ativas no mesmo horário.</p><div class="modal-actions"><button type="button" id="delete-btn" class="danger-btn hidden">Excluir</button><span class="grow"></span><button type="button" class="outline-btn" data-close="modal">Cancelar</button><button type="submit" id="save-btn" class="primary-btn">Salvar ensaio</button></div><p class="error hidden" id="form-error"></p></form></div>
+<script src="./config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="./app.js" defer></script>
+</body></html>
